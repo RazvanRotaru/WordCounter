@@ -1,0 +1,63 @@
+									Tema 1 SPRC
+Rotaru Razvan Paul
+341C3
+
+
+
+Tema a fost implementata in C++.
+
+Am folosit 2 instante de unordered_map pentru a retine aparitiile cuvintelor in
+fisierul de pe server: 
+						- word_no pentru numarul fiecarui cuvant ce apare in text
+						- letters_no pentru cuvintele de o anumita lungime
+
+Fisierul "aflat" pe server este The Star, opera scurta a lui Arthur C. Clarke,
+care merita citita, daca n-ati facut-o inca.
+
+
+
+	functionalitate:
+
+[]server
+! Serverul trebui pornit fara niciun parametru ( ./tema_server )
+! si se va opri cu CTRL+C
+
+~ Serverul va incarca toate cuvintele din fisier la momentul pornirii in ambele hashtableuri.
+
+~ In momentul in care se primeste comanda APPEND, cuvintele nu vor fi scrise in fisier, ci ele
+  vor fi procesate direct, actualizand tabelele de dispersie.
+
+~ Comanda APPEND va esua in cazul in care cuvantul primit ca paramentru este un sir vid.
+
+~ Pentru cererile de tip SEARCH se va intoarce valoarea din tablele pentru cuvantul sau pentru
+  lungimea cuvintelor ceruta si se va intoarce un mesaj conform enuntului.
+
+~ Etapele pentru raspunsul comenzilor se vor diferentia cu ajutorul command_accepted care va 
+  avea 3 stari:
+  				- 0 in cazul in care nicio comanda nu a fost acceptata
+  				- 1 in cazul in care se acceptase comanda APPEND
+  				- 2 in cazul in care se acceptase comanda SEARCH
+
+[]client
+! Clientul trebuie apelat cu 3 parametrii: IP-ul serverului, comanda (poate fi
+NULL) si cuvantul (poate fi NULL) ex: ./tema_client localhost SEARCH God
+! Clientul ruleaza o singura comanda dupa care se opreste
+
+~ Clientul trimite catre server prima oara tipul comenzii (SEARCH|APPEND), cuvantul asociat
+  comenzii fiind un sir vid
+
+~ Daca raspunsul serverului este favorabil, clientul ii trimite serverului si cuvantul sau
+  lungimea cuvintelor
+
+~ Ambele raspunsuri vor fi afisate in promptul clientului
+
+
+[] structura mesajului
+
+~ Mesajul are 3 campuri:
+						- command pentru a trimite comanda sub forma de sir de caractere
+						- word pentru --//-- cuvantul sub forma --//--
+						- letters pentru a trimite dimensiunea cuvintelor, este nefolosit
+							si dimensiunea se trimite tot sub forma de sir de caractere
+
+
